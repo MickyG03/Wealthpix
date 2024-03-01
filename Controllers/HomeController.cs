@@ -1,31 +1,28 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using wealthpix.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
 
-namespace wealthpix.Controllers;
-
-public class HomeController : Controller
+namespace wealthpix.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+         private readonly IConfiguration _configuration;
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+         public HomeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        public IActionResult Index()
+        {
+            var botName = _configuration["AppConfig:BotConfig:BotName"];
+            var slogan = _configuration["AppConfig:BotConfig:Slogan"];
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var model = new homeModel(botName,slogan);
+
+            return View(model);
+
+        }
     }
 }

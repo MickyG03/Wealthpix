@@ -31,8 +31,11 @@ app.UseAuthorization();
 // app.MapControllerRoute(
 //     name: "default",
 //     pattern: "{controller=Home}/{action=Index}/{id?}");
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller=wealthpixChat}/{action=Intro}");
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=wealthpixChat}/{action=Intro}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

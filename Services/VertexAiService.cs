@@ -62,7 +62,7 @@ namespace wealthpix.Services
             _history.Add(new ChatHistory("bot", botMessage));
             
             return new wealthpixChatViewModel(
-                _appConfig.BotConfig.BotName, 
+                _appConfig.BotConfig.BotName,
                 _appConfig.BotConfig.Slogan, 
                 _history);
         }
