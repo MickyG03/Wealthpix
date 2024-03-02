@@ -9,40 +9,77 @@
 
 /* Styling for the card */
 .card {
-    background-color: #2a2a2a;
+    background-color: #2a2a2a00;
     border-radius: 25px;
+    width: 125%;
 }
 
 .card-body {
-    background-color: #2a2a2a;
+    background-color: #2a2a2a00;
     border: 0;
     border-radius: 25px;
+
 }
 
+h3 {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 2vw;
+    margin: 0;
+    padding-bottom: 0.5rem;
+    letter-spacing: 1.2rem;
+    color: #ff0266;
+    transition: all 0.3s ease;
+    z-index: 3;
+  }
+  h3:hover {
+    transform: translate3d(0, -10px, 22px);
+    color: #c7c4c3;
+  }
+
+.background {
+    position: absolute;
+    height: 90vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: auto;
+    background-image: url("../images/background2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+  }
 /* Styling for the chat box */
 #chat-box {
     height: 500px;
-    overflow-y: auto;
-    background-color: #2a2a2a;
+    overflow-y: scroll;
+    background-color: #2a2a2a00;
     color: lightgray;
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
 }
 
 /* Styling for user messages */
 .text-right.mb-2 {
-    overflow-wrap: break-word;
     border-radius: 15px;
     padding: 15px;
-    margin-right: 20px;
+    margin-left: 250px;
+    background-color: #00000060;
+    width: fit-content;
+    float: right;
 }
 
 /* Styling for bot messages */
 #bot-message {
-    background-color: #c6d4f4;
-    color: #2a2a2a;
-    overflow-wrap: break-word;
+    background-color:#23232384;
+    color: #fcfcfc;
     border-radius: 15px;
     padding: 15px;
-    margin-right: 20px;
+    margin-right: 250px;
+    width: fit-content;
+
 }
 
 /* Styling for the form */
@@ -55,49 +92,38 @@ form {
     background-color: #2a2a2a;
     color: lightgray;
     margin-right: 5px;
-    border-radius: 20px;
+    border-radius: 10px 0px 0px 10px;
     padding: 15px;
     border-color: #4a4a4a;
 }
 
 /* Styling for the submit button */
 #submit-button {
-    background-color: transparent;
+    background-color: #2a2a2a;
     color: lightgray;
-    border: none;
+    border-color: #4a4a4a;
+    border-radius: 0px 10px 10px 0px;
 }
 
-/* Styling for the spinner */
-#spinner {
-    width: 30px;
-    height: 30px;
-}
-
-/* Additional styling for the bot info section */
-.d-flex.align-items-center img {
-    padding-right: 20px;
-    width: 70px;
-}
-
-.d-flex.align-items-center div h3.text-white {
-    margin-top: 20px;
+#submit-button:focus {
+    background-color: #000000;
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #2a2a2a  !important;
 }
 
 #bot-name {
     margin-top: 10px;
 }
 
-#slogan {
-    margin-top: 5px;
-}
-
-.d-flex.align-items-center div h5.text-white {
-    margin-top: 20px;
-}
 
 .form-control:focus {
     background-color: #2a2a2a;
-    color: lightgray
+    color: lightgray;
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    border-bottom-color: #ff0266  !important;
 }
 
 .chat-bubble {
@@ -110,6 +136,7 @@ form {
     border-radius: 20px;
     border-bottom-left-radius: 2px;
     display:inline-block;
+    max-width: 80px;
   }
 
 .typing {
@@ -144,6 +171,23 @@ form {
 .typing .dot:last-child {
     margin-right: 0;
   }
+
+  .wrapper1 {
+    position: absolute;
+    top: 1%;
+    right: 2%;
+    z-index: 1;
+    color: #7c7c7c;
+    font-family: 'Josefin Sans';
+    letter-spacing: 0.3rem;
+    font-weight: 500;
+    font-size: small;
+  }
+  
+  #date {
+    text-align: center;
+    margin: 15px;
+  }
   
 @keyframes mercuryTypingAnimation {
     0% {
@@ -158,4 +202,285 @@ form {
       transform: translateY(0px);
       background-color: #6a6a6a; 
     }
+}
+
+::-webkit-scrollbar {
+    width: 20px; /* Set width of the scrollbar */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 2px 0px rgb(109, 109, 109);
+    border: solid 3px transparent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background:transparent; /* Color of the handle on hover */
+    box-shadow: inset 2px 0px rgb(99, 48, 48);
+    border: solid 3px transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border: solid 3px transparent;/* Color of the scrollbar track */
+}
+
+/* Handle when dragging */
+::-webkit-scrollbar-thumb:active {
+    background:transparent; /* Color of the handle on hover */
+    box-shadow: inset 2px 0px rgb(99, 48, 48);
+    border: solid 3px transparent;
+}
+
+  @media (min-width: 800px) {
+
+    .mobile {
+        display: none;
+    }
+
+    .desktop .menubar {
+        width: 200px;
+        height: 100%;
+        line-height: 60px;
+        position: fixed;
+        transition: all .5s ease;
+        z-index: 999;
+        left:0%;
+        top:0%;
+        background-color: #0000007d;
+        border-right: 3px solid #212121;
+    }
+
+    .desktop .menubar nav {
+      float: left;
+      margin-left: 20%;
+      flex-direction: column;
+      display: flex;
+    }
+
+    .desktop .menubar nav a {
+        color: #a3a3a3;
+        font-size: 18px;
+        font-weight: 300;
+        letter-spacing: 0.3rem;
+        font-family: 'Josefin Sans';
+        text-decoration: none;
+        transition: color .25s ease;
+        margin-bottom: 10px;
+    }
+
+
+    .desktop .menubar nav a:hover  {
+        color: rgb(234, 78, 78);
+    }
+
+    .desktop .menubar.resize {
+        height: 70px;
+        line-height: 70px;
+        background: rgb(31, 32, 39);
+        border-bottom: 1px solid rgb(46, 48, 56);
+    }
+
+    .desktop .menubar img {
+
+        width: 80px; /* Example width */
+        height: 50px; /* Maintain aspect ratio */
+        display: block; /* Make it a block element */
+        margin: 0 auto;
+        margin-top: 30px;
+        margin-bottom: 60px;
+
+    }
+
+}
+
+@media only screen and (max-width: 799px) {
+
+
+  .desktop {
+      display: none;
+  }
+
+  .wrapper1 {
+      top: 85%;
+      left: -2%;
+      z-index: 1;
+  }
+
+  body {
+      margin: 0;
+      padding: 0;
+      height: 3000px; /* Just for testing purposes */
+  }
+
+  header {
+      width: 100%;
+      position: fixed;
+      height: 70px;
+      line-height: 70px;
+      transition: all .5s ease;
+      z-index: 999;
+  }
+
+  header.resize {
+      height: 50px;
+      line-height: 50px;
+      background: rgb(31, 32, 39);
+      border-bottom: 1px solid rgb(46, 48, 56);
+  }
+
+  header.resize .button_container {
+      top: 14px;
+  }
+
+  header.resize #logo {
+      font-size: 20px;
+  }
+
+  .button_container {
+      position: fixed;
+      width: 20px;
+      height: 25px;
+      z-index: 100;
+      right: 20px;
+      top: 25px;
+      cursor: pointer;
+      transition: all .25s;
+  }
+
+  .button_container span {
+      width: 20px;
+      height: 1px;
+      position: absolute;
+      background: #fdad59;
+      transition: all .35s ease;
+  }
+
+  .top {
+      top: 0px;
+  }
+
+  .middle {
+      top: 10px;
+  }
+
+  .bottom {
+      top: 20px;
+  }
+
+  .button_container.active .top {
+      transform: translateY(10px) translateX(0) rotate(45deg);
+  }
+
+  .button_container.active .middle {
+      opacity: 0;
+  }
+
+  .button_container.active .bottom {
+      transform: translateY(-10px) translateX(0) rotate(-45deg);
+  }
+
+  .overlay {
+      position: fixed;
+      background: rgba(51, 51, 51, 0.774);
+      visibility: hidden;
+      width: 100%;
+      height: 0%;
+      left: 0px;
+      top: 0px;
+      opacity: 0;
+      transition: opacity .35s, height .35s, visibility .35s;
+      z-index: 10;
+  }
+
+  .overlay.open {
+      height: 100%;
+      opacity: .98;
+      visibility: visible;
+  }
+
+  .overlay.open li {
+      animation: fadeInTop .5s ease forwards;
+      animation-delay: .35s;
+  }
+
+  .overlay.open li:nth-of-type(2) {
+      animation-delay: .4s;
+  }
+
+  .overlay.open li:nth-of-type(3) {
+      animation-delay: .45s;
+  }
+
+  .overlay.open li:nth-of-type(4) {
+      animation-delay: .50s;
+  }
+
+  .overlay nav {
+      position: relative;
+      height: 70%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      font-family: 'Josefin-Sans', serif;
+      font-weight: lighter;
+      letter-spacing: 10px;
+      text-align: center;
+  }
+
+  .overlay ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      display: inline-block;
+      position: relative;
+      height: 100%;
+  }
+
+  .overlay ul li {
+      display: block;
+      height: 25%;
+      height: calc(100% / 4);
+      min-height: 50px;
+      position: relative;
+      opacity: 0;
+  }
+
+  .overlay ul li a {
+      display: block;
+      position: relative;
+      color: #FFF;
+      text-decoration: none;
+      overflow: hidden;
+  }
+
+  .overlay ul li a:hover:after,
+  .overlay ul li a:focus:after,
+  .overlay ul li a:active:after {
+      width: 100%;
+  }
+
+  .overlay ul li a:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0%;
+      transform: translateX(-50%);
+      height: 1px;
+      background: #FFF;
+      transition: .35s;
+  }
+
+  @keyframes fadeInTop {
+      0% {
+          opacity: 0;
+          bottom: 20%;
+      }
+      100% {
+          opacity: 1;
+          bottom: 0;
+      }
+  }
 }

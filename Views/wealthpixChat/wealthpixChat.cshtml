@@ -2,69 +2,120 @@
     ViewData["Title"] = "Finance Bot"; // Set your page title here
 }
 
-<div class="container p-1">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="container">
-                <div class="d-flex align-items-center">
-                    <img src="@Url.Content("~/images/bot_icon.png")" alt="Bot Icon" class="mr-2" />
-                    <div>
-                        <h3 id="bot-name" class="text-black">@Model.BotName</h1>
-                        <h5 id="slogan" class="text-black">@Model.Slogan</h2>
-                    </div>
-                </div>
-            </div>  
-            <div class="card mt-3">
-                <div class="card-body">
-                    <div id="chat-box" class="output" data-simplebar>
-                        @foreach (var message in Model.ChatHistory)
-                            {
-                                <div class="@(message.Author == "user" ? "text-right mb-2" : "")">
-                                    @if (message.Author == "user")
-                                    {
-                                        <strong>You:</strong> <span>@message.Content</span>
-                                    }
-                                    else
-                                    {
-                                        <div id="bot-message" class="mb-2">
-                                            <strong>Bot:</strong> <span>@message.Content</span>
-                                        </div>
-                                    }
+<head >
+    <link rel="stylesheet" href="~/css/aibot.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="background">
+    <span class="desktop">
+        <div class = "menubar">
+            <img src="~/images/logo.png" alt="Logo">
+            <nav>
+                <a href="#"><i class="fa fa-home" style="font-size:20px;margin-right:20px"></i> Home</a>
+                <a href="#"><i class="fa fa-info-circle" aria-hidden="true" style="font-size:20px;margin-right:20px"></i> About</a>
+            </nav>
+        </div>
+  </span>
+
+  <!--Mobile Navigation-->
+  <span class="mobile">
+    <header>
+      <div class="button_container">
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+      </div>
+    </header>
+
+    <div class="overlay">
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </span>
+    <div >
+        <div class="container p-1">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="container">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h3 id="bot-name" >@Model.BotName</h3>
+                                <div class="wrapper1">
+                                    <div id="date"></div>
                                 </div>
-                            }
-                        <div class="chat-bubble d-none" id="typing-dots">
-                            <div class="typing">
-                              <div class="dot"></div>
-                              <div class="dot"></div>
-                              <div class="dot"></div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <div id="chat-box" class="output" data-simplebar>
+
+                                @foreach (var message in Model.ChatHistory)
+                                {
+                                    <div class="">
+                                        @if (message.Author == "user")
+                                        {
+                                            <div class="text-right mb-2" style="display: flex; align-items: center;">
+                                                <span>@message.Content</span>
+                                                <strong><i class="fa fa-user-o" aria-hidden="true" style="font-size:20px;margin-left:20px"></i></strong>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div id="bot-message" class="mb-2" style="display: flex; align-items: center;">
+                                                <strong style="position: relative;" ><i class="fa fa-circle-o-notch" aria-hidden="true" style="font-size:20px;margin-right:20px"></i></strong>
+                                                <span style="overflow-wrap: break-word;">@message.Content</span>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                <div class="chat-bubble d-none" id="typing-dots">
+                                    <div class="typing">
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <form method="POST" asp-action="Chat" class="d-flex" style="width: 120%;">
+                        <input type="text" autocomplete="off" id="user-prompt" name="prompt"
+                            class="form-control mt-3 mr-2" placeholder="Enter a prompt" class="form-control">
+                        <button type="submit" id="submit-button" class="btn btn-secondary mt-3">
+                            <img src="@Url.Content("~/images/send_button.png")" alt="Send Button" class="mr-2" style="height:30px;">
+                        </button>
+                    </form>
                 </div>
             </div>
-            <form method="POST" asp-action="Chat" class="d-flex">
-                <input type="text" autocomplete="off" id="user-prompt" name="prompt" class="form-control mt-3 mr-2" placeholder="Enter a prompt" class="form-control">
-                <button type="submit" id="submit-button" class="btn btn-secondary mt-3">
-                    <img src="@Url.Content("~/images/send_button.png")" alt="Send Button" class="mr-2">
-                </button>
-            </form>
+
+
         </div>
     </div>
+</body>
 
-    
-</div>
 <script>
-     document.getElementById('submit-button').addEventListener('click', function() {
+    document.getElementById('submit-button').addEventListener('click', function () {
         document.getElementById('typing-dots').classList.remove('d-none');
         scrollToBottom();
     });
 
-    window.onload = function() {
+    window.onload = function () {
         scrollToBottom();
     }
 
     function scrollToBottom() {
-        var container = document.querySelector('#chat-box .simplebar-content-wrapper'); 
+        var container = document.querySelector('#chat-box .simplebar-content-wrapper');
         container.scrollTo({ top: container.scrollHeight });
     }
 </script>
+<script src="~/js/chat.js"></script>
