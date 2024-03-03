@@ -80,6 +80,13 @@
     margin: 15px;
   }
 
+  .wrapper1 img {
+
+    width: 50px; /* Example width */
+    height: 30px; /* Maintain aspect ratio */
+    display: block; /* Make it a block element */
+    margin-right: 20px;
+}
 
 
   @media (min-width: 800px) {
