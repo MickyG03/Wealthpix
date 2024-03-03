@@ -7,6 +7,7 @@ using Google.Cloud.AIPlatform.V1;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.Extensions.Options;
 using Value = Google.Protobuf.WellKnownTypes.Value;
+using System.Diagnostics;
 
 namespace wealthpix.Services
 {
@@ -22,6 +23,14 @@ namespace wealthpix.Services
 
         public async Task<wealthpixChatViewModel> PredictAsync(string prompt)
         {
+            Debug.WriteLine(prompt);
+            Debug.WriteLine("here");
+            if (prompt == "Who are you and what can you do?" && _history.Count == 2){
+                return BuildChatMessage("123repeatedinitialprompt321",  null);
+            }
+            if(prompt=="" || prompt ==" " || prompt==null ){
+                return BuildChatMessage("",  null);
+            }
             PredictionServiceClientBuilder serviceClientBuilder = new PredictionServiceClientBuilder
             {
                 Endpoint = _appConfig.PaLMApiConfig.RegionEndpoint
@@ -35,7 +44,7 @@ namespace wealthpix.Services
 
             List<Value> instances = GetInstances(prompt);
             Value parameters = GetParameters();
-            
+
             PredictResponse response = await predictionServiceClient.PredictAsync(endpoint, instances, parameters);
 
             return BuildChatMessage(prompt, response);
@@ -53,14 +62,22 @@ namespace wealthpix.Services
                         .ListValue.Values[0]
                         .StructValue.Fields["content"]
                         .StringValue;
-            } 
-            else 
+            }
+            else if (prompt=="" && predictResponse==null){
+                botMessage="Seems like you skipped the prompt, is there anything I can assist you with?";
+            }
+            else
             {
                 botMessage = "The LLM did not provide a response";
             }
-            _history.Add(new ChatHistory("user", prompt));
-            _history.Add(new ChatHistory("bot", botMessage));
-            
+
+            if(prompt != "123repeatedinitialprompt321"){
+
+                _history.Add(new ChatHistory("user", prompt));
+                _history.Add(new ChatHistory("bot", botMessage));
+
+            }
+
             return new wealthpixChatViewModel(
                 _appConfig.BotConfig.BotName,
                 _appConfig.BotConfig.Slogan, 
