@@ -3,6 +3,9 @@
 
 Wealthpix is a fintech chatbot developed using ASP.NET MVC framework with C# and follows the MVC (Model-View-Controller) architecture pattern. The chatbot leverages Google Gemine's Vertex AI for its backend infrastructure and is trained using few-shot prompt training techniques.
 
+![Wealthpix test](https://github.com/MickyG03/Wealthpix/assets/76037226/77b48098-3ebf-4e79-aaab-fcbab95cf3a1)
+
+
 ## Features
 
 - Fintech Services: Offers a range of fintech services including account management, investment advice, budget tracking, and more.
