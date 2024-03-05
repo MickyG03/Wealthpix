@@ -52,7 +52,7 @@ h3 {
   }
 /* Styling for the chat box */
 #chat-box {
-    height: 500px;
+    height: 550px;
     overflow-y: scroll;
     background-color: #2a2a2a00;
     color: lightgray;
