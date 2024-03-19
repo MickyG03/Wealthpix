@@ -23,8 +23,8 @@ namespace wealthpix.Services
 
         public async Task<wealthpixChatViewModel> PredictAsync(string prompt)
         {
-            Debug.WriteLine(prompt);
-            Debug.WriteLine("here");
+            // Debug.WriteLine(prompt);
+            // Debug.WriteLine("here");
             if (prompt == "Who are you and what can you do?" && _history.Count == 2){
                 return BuildChatMessage("123repeatedinitialprompt321",  null);
             }
@@ -38,7 +38,7 @@ namespace wealthpix.Services
             PredictionServiceClient predictionServiceClient = serviceClientBuilder.Build();
             EndpointName endpoint = EndpointName.FromProjectLocationPublisherModel(
                 _appConfig.PaLMApiConfig.Project, 
-                _appConfig.PaLMApiConfig.Location, 
+                _appConfig.PaLMApiConfig.Location,
                 _appConfig.PaLMApiConfig.Publisher, 
                 _appConfig.PaLMApiConfig.Model);
 
