@@ -6,6 +6,7 @@ Wealthpix is a fintech chatbot developed using ASP.NET MVC framework with C# and
 ![Screenshot 2024-03-05 014635](https://github.com/MickyG03/Wealthpix/assets/76037226/1f2f8664-9936-4452-b28c-1c034a45a9f8)
 ![Screenshot 2024-03-05 014935](https://github.com/MickyG03/Wealthpix/assets/76037226/a0baccf8-91b1-4980-af79-28b71e5d071c)
 
+Check complete output at: https://github.com/MickyG03/Wealthpix/blob/main/output/Wealthpix-Demo.mp4
 
 ## Features
 
