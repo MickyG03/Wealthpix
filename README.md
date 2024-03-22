@@ -23,7 +23,7 @@ To get started with Wealthpix, follow these steps:
 
 #### 1. Clone repository: 
 ```sh
-git clone https://github.com/MickyG03/WealthPix
+git clone "https://github.com/MickyG03/Wealthpix.git"
 ```
 #### 2. Install Dotnet: 
 Download .Net framework from [.Net Framework]
