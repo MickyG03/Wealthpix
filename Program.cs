@@ -7,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddControllersWithViews();
 builder.Services.Configure<AppConfig>(builder.Configuration.GetSection(nameof(AppConfig)));
+builder.Services.AddSingleton<IPredictionClientFactory, GooglePredictionClientFactory>();
+builder.Services.AddSingleton<IExamplesProvider, FileExamplesProvider>();
 builder.Services.AddSingleton<IVertexAiService, VertexAiService>();
 
 var app = builder.Build();

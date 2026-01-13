@@ -15,10 +15,17 @@ namespace wealthpix.Services
     {
         private readonly AppConfig _appConfig;
         private readonly List<ChatHistory> _history = new List<ChatHistory>();
+        private readonly IPredictionClient _predictionClient;
+        private readonly IExamplesProvider _examplesProvider;
 
-        public VertexAiService(IOptions<AppConfig> appConfigOptions)
+        public VertexAiService(
+            IOptions<AppConfig> appConfigOptions,
+            IPredictionClientFactory predictionClientFactory,
+            IExamplesProvider examplesProvider)
         {
             _appConfig = appConfigOptions.Value;
+            _predictionClient = predictionClientFactory.Create(_appConfig.PaLMApiConfig.RegionEndpoint);
+            _examplesProvider = examplesProvider;
         }
 
         public async Task<wealthpixChatViewModel> PredictAsync(string prompt)
@@ -31,11 +38,6 @@ namespace wealthpix.Services
             if(prompt=="" || prompt ==" " || prompt==null ){
                 return BuildChatMessage("",  null);
             }
-            PredictionServiceClientBuilder serviceClientBuilder = new PredictionServiceClientBuilder
-            {
-                Endpoint = _appConfig.PaLMApiConfig.RegionEndpoint
-            };
-            PredictionServiceClient predictionServiceClient = serviceClientBuilder.Build();
             EndpointName endpoint = EndpointName.FromProjectLocationPublisherModel(
                 _appConfig.PaLMApiConfig.Project, 
                 _appConfig.PaLMApiConfig.Location,
@@ -45,7 +47,7 @@ namespace wealthpix.Services
             List<Value> instances = GetInstances(prompt);
             Value parameters = GetParameters();
 
-            PredictResponse response = await predictionServiceClient.PredictAsync(endpoint, instances, parameters);
+            PredictResponse response = await _predictionClient.PredictAsync(endpoint, instances, parameters);
 
             return BuildChatMessage(prompt, response);
         }
@@ -84,12 +86,6 @@ namespace wealthpix.Services
                 _history);
         }
 
-        private dynamic[] GetExamples()
-        {
-            string json = File.ReadAllText("examples.json");
-            return JsonSerializer.Deserialize<dynamic[]>(json);
-        }
-
         private List<Value> GetInstances(string prompt)
         {
             return new List<Value>
@@ -99,7 +95,7 @@ namespace wealthpix.Services
                         JsonSerializer.Serialize(new 
                         {   
                             context = _appConfig.BotConfig.Context,  
-                            examples = GetExamples(),
+                            examples = _examplesProvider.GetExamples(),
                             messages = new [] { new 
                                 { 
                                     author = "user",

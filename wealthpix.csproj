@@ -11,4 +11,11 @@
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Exclude test project sources from the web app compilation -->
+    <Compile Remove="Wealthpix.Tests\**\*.cs" />
+    <EmbeddedResource Remove="Wealthpix.Tests\**\*" />
+    <None Remove="Wealthpix.Tests\**\*" />
+  </ItemGroup>
+
 </Project>
